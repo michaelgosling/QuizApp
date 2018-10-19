@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">QuizApp</string>
     <string name="nameText">Name</string>
+    <string name="termPlaceholder">Term</string>
+    <string name="scoreDefault">Score: 0/0</string>
+    <string name="answerDefault">Answer</string>
+    <string name="nameBtn">Submit</string>
 </resources>

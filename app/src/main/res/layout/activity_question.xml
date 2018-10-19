@@ -6,4 +6,77 @@
     android:layout_height="match_parent"
     tools:context=".QuestionActivity">
 
+    <TextView
+        android:id="@+id/termTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/googlesans_bold"
+        android:text="@string/termPlaceholder"
+        android:textAlignment="viewStart"
+        android:textSize="36sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scoreTextView" />
+
+    <TextView
+        android:id="@+id/scoreTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:fontFamily="@font/googlesans_regular"
+        android:text="@string/scoreDefault"
+        android:textAlignment="textEnd"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="273dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/termTextView">
+
+        <Button
+            android:id="@+id/answerAbtn"
+            style="@android:style/Widget.Material.Button.Borderless"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/googlesans_medium"
+            android:text="@string/answerDefault"
+            android:textAlignment="viewStart" />
+
+        <Button
+            android:id="@+id/answerBbtn"
+            style="@android:style/Widget.Material.Button.Borderless"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/googlesans_medium"
+            android:text="@string/answerDefault"
+            android:textAlignment="viewStart" />
+
+        <Button
+            android:id="@+id/answerCbtn"
+            style="@android:style/Widget.Material.Button.Borderless"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/googlesans_medium"
+            android:text="@string/answerDefault"
+            android:textAlignment="viewStart" />
+
+        <Button
+            android:id="@+id/answerDbtn"
+            style="@android:style/Widget.Material.Light.Button.Borderless"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/googlesans_medium"
+            android:text="@string/answerDefault"
+            android:textAlignment="viewStart" />
+
+    </LinearLayout>
+
 </android.support.constraint.ConstraintLayout>
