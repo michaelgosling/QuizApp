@@ -5,18 +5,15 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
 
 import me.mgosling.quizapp.databinding.ActivityQuestionBinding;
 
 public class QuestionActivity extends AppCompatActivity {
 
+    private Quiz quiz;
+
     // databinding property to avoid FindViewById
     protected ActivityQuestionBinding binding;
-
-    private String userName, term, possibleAnswers[], correctAnswer;
-    private int currentScore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,17 +22,14 @@ public class QuestionActivity extends AppCompatActivity {
         // initialize binding with activity_question content view.
         binding = DataBindingUtil.setContentView(this, R.layout.activity_question);
 
-        // get the intent that started this activity, then extract the string
+        // get the intent that started this activity, then extract the username string
+        // and create a new quiz object with it.
         Intent intent = getIntent();
-        userName = intent.getStringExtra(MainActivity.USER_NAME);
-
-
+        quiz = new Quiz(intent.getStringExtra(MainActivity.USER_NAME), getBaseContext());
 
     }
 
-    protected void readQuizData(){
 
-    }
 
 
     @Override
