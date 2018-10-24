@@ -1,23 +1,39 @@
 package me.mgosling.quizapp;
 
 import android.content.Intent;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+
+import me.mgosling.quizapp.databinding.ActivityQuestionBinding;
 
 public class QuestionActivity extends AppCompatActivity {
 
-    String userName, currentScoreText, term, possibleAnswers[], correctAnswer;
+    // databinding property to avoid FindViewById
+    protected ActivityQuestionBinding binding;
+
+    private String userName, term, possibleAnswers[], correctAnswer;
+    private int currentScore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_question);
+
+        // initialize binding with activity_question content view.
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_question);
 
         // get the intent that started this activity, then extract the string
         Intent intent = getIntent();
         userName = intent.getStringExtra(MainActivity.USER_NAME);
 
+
+
+    }
+
+    protected void readQuizData(){
 
     }
 
