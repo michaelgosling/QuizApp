@@ -13,6 +13,7 @@ import java.util.Random;
 
 class Quiz {
 
+    // private properties
     private String userName, definition, correctAnswer;
     private int currentScore, currentQuestionIndex;
     private HashMap<String, String> quizMap = new HashMap<>();
@@ -20,6 +21,7 @@ class Quiz {
     private List<String> possibleAnswers = new ArrayList<>();
     private boolean quizFinished = false;
 
+    // getters and setters
     protected boolean isQuizFinished() {
         return quizFinished;
     }
@@ -45,14 +47,20 @@ class Quiz {
     }
 
 
+    // constructor that takes the name of the user and an input stream for the file
     public Quiz(String name, InputStream inputStream) {
         userName = name;
 
         readQuizData(inputStream);
+
+        // set the current question index to -1 and then call nextQuestion
         currentQuestionIndex = -1;
         nextQuestion();
     }
 
+
+    // tries an answer and if it's correct increments the score, calls nextQuestion and returns true
+    // otherwise it calls nextQuestion and returns false.
     protected boolean guessAnswer(String answer) {
         if (answer.equals(correctAnswer)) {
             currentScore++;
@@ -66,27 +74,40 @@ class Quiz {
 
     // grabs next question and random answers
     private void nextQuestion() {
+
+        // increment current question index
         currentQuestionIndex++;
+
+        // if the current question index is smaller than the size of the quiz list
         if (currentQuestionIndex < quizList.size()) {
+
+            // clear the possible answers
             possibleAnswers.clear();
 
+            // grab the definition of current question, assign the correct answer variable
+            // and add it to the list of possible answers.
             definition = quizList.get(currentQuestionIndex)[0];
             correctAnswer = quizMap.get(definition);
             possibleAnswers.add(correctAnswer);
 
+            // while there's less than 4 possible answers, get a random answer
+            // and if it hasn't already been added, add it to the list.
             while (possibleAnswers.size() < 4) {
                 String answer = quizList.get(new Random().nextInt(quizList.size() - 1))[1];
-                if (!answer.equals(correctAnswer) && !possibleAnswers.contains(answer)) {
+                if (!possibleAnswers.contains(answer)) {
                     possibleAnswers.add(answer);
                 }
             }
+
+            // shuffle possible answers so they display in a random order
             Collections.shuffle(possibleAnswers);
         } else {
+            // if the question index is out of bounds, set quiz as finished
             quizFinished = true;
         }
     }
 
-    // Reads quiz file into quizMap hashmap.
+    // Reads quiz file into hashmap and list
     private void readQuizData(InputStream is) {
         // array to read in file lines
         List<String> lines = new ArrayList<>();
@@ -103,19 +124,18 @@ class Quiz {
             bufferedReader.close();
             is.close();
         } catch (Exception e){
+            // log an error if fails
             Log.e("QUIZ_DATA_READING", "Failed while trying to read in text file.");
         }
 
         // shuffle lines so terms are in different order
         Collections.shuffle(lines);
 
-        // read terms into hashmap and ArrayList
+        // read terms into hashmap and ArrayList by splitting on colons
         for (String line : lines){
             String termAndDef[] = line.split(":");
             quizList.add(termAndDef);
             quizMap.put(termAndDef[0], termAndDef[1]);
         }
-
-
     }
 }

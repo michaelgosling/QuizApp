@@ -26,16 +26,16 @@ public class MainActivity extends AppCompatActivity {
         nameSubmitBtn = findViewById(R.id.nameSubmitBtn);
 
 
-        // set the fabs onclick listener so it checks to see if there's anything entered for
-        // a name. If there is, it calls start quiz. If there's not, it shows a toast explaining
+        // set the buttons onclick listener so it checks to see if name input is valid.
+        // If it is is, it calls start quiz. If there's not, it shows a toast explaining
         // to the user that they need to enter their name.
         nameSubmitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (nameEditText.getText().toString().length() > 0)
+                if (nameEditText.getText().toString().matches("['a-zA-Z ]+"))
                     startQuiz();
                 else
-                    Toast.makeText(getBaseContext(), "Enter your name!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getBaseContext(), "Enter your real name!", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -48,4 +48,5 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra(USER_NAME,userName);
         startActivity(intent);
     }
+
 }

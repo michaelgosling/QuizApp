@@ -16,12 +16,13 @@ public class FinalActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_final);
 
-        // get intent that started this activity
-        Intent intent = getIntent();
-
+        // bind text views from layout to variable
         scoreText = findViewById(R.id.scoreTextView);
         nameText = findViewById(R.id.nameTextView);
 
+        // get intent that started this activity, grab final score and users name
+        // and set the text of the views accordingly.
+        Intent intent = getIntent();
         scoreText.setText(intent.getStringExtra(QuestionActivity.FINAL_SCORE));
         nameText.setText(intent.getStringExtra(QuestionActivity.USER_NAME));
 
