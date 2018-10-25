@@ -21,6 +21,7 @@
         android:fontFamily="@font/googlesans_regular"
         android:hint="@string/nameText"
         android:inputType="textPersonName"
+        android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
