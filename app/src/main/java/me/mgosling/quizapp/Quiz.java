@@ -1,5 +1,7 @@
 package me.mgosling.quizapp;
 
+import android.util.Log;
+
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -11,7 +13,7 @@ import java.util.Random;
 
 class Quiz {
 
-    private String userName, term, correctAnswer;
+    private String userName, definition, correctAnswer;
     private int currentScore, currentQuestionIndex;
     private HashMap<String, String> quizMap = new HashMap<>();
     private List<String[]> quizList = new ArrayList<>();
@@ -30,8 +32,8 @@ class Quiz {
         return userName;
     }
 
-    protected String getTerm(){
-        return term;
+    protected String getDefinition() {
+        return definition;
     }
 
     protected List<String> getPossibleAnswers(){
@@ -68,8 +70,8 @@ class Quiz {
         if (currentQuestionIndex < quizList.size()) {
             possibleAnswers.clear();
 
-            term = quizList.get(currentQuestionIndex)[0];
-            correctAnswer = quizMap.get(term);
+            definition = quizList.get(currentQuestionIndex)[0];
+            correctAnswer = quizMap.get(definition);
             possibleAnswers.add(correctAnswer);
 
             while (possibleAnswers.size() < 4) {
@@ -101,7 +103,7 @@ class Quiz {
             bufferedReader.close();
             is.close();
         } catch (Exception e){
-            e.printStackTrace();
+            Log.e("QUIZ_DATA_READING", "Failed while trying to read in text file.");
         }
 
         // shuffle lines so terms are in different order

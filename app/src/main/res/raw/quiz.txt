@@ -1,10 +1,10 @@
-adb:It provides tools to browse the device, copy tools on the device, and forward ports for debugging.
-Activity:A single screen in an application, with supporting Java code, derived from the ___ class.
-Action:A description of something that an Intent sender wants done.
-Canvas:A drawing surface that handles compositing of the actual bits against a Bitmap or Surface object.
-Dalvik:The Android platform's virtual machine.
-Intent:A message object that you can use to launch or communicate with other applications/activities asynchronously.
-Widget:One of a set of fully implemented View subclasses that render form elements and other UI components, such as a text box or popup menu.
-View:An object that draws to a rectangular area on the screen and handles click, keystroke, and other interaction events.
-Theme:A set of properties (text size, background color, and so on) bundled together to define various default display settings.
-Resources:Nonprogrammatic application components that are external to the compiled application code, but which can be loaded from application code using a well-known reference format.
+It provides tools to browse the device, copy tools on the device, and forward ports for debugging.:adb
+A single screen in an application, with supporting Java code, derived from the ___ class.:Activity
+A description of something that an Intent sender wants done.:Action
+A drawing surface that handles compositing of the actual bits against a Bitmap or Surface object.:Canvas
+The Android platform's virtual machine.:Dalvik
+A message object that you can use to launch or communicate with other applications/activities asynchronously.:Intent
+One of a set of fully implemented View subclasses that render form elements and other UI components, such as a text box or popup menu.:Widget
+An object that draws to a rectangular area on the screen and handles click, keystroke, and other interaction events.:View
+A set of properties (text size, background color, and so on) bundled together to define various default display settings.:Theme
+Nonprogrammatic application components that are external to the compiled application code, but which can be loaded from application code using a well-known reference format.:Resources

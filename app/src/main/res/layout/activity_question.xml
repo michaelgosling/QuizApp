@@ -9,15 +9,14 @@
     tools:context=".QuestionActivity">
 
     <TextView
-        android:id="@+id/termTextView"
+        android:id="@+id/defTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginBottom="1dp"
         android:fontFamily="@font/googlesans_bold"
-        android:text="@string/termPlaceholder"
+        android:text="@string/questionPlaceholder"
         android:textAlignment="viewStart"
-        android:textSize="36sp"
+        android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/scoreTextView" />
@@ -38,7 +37,7 @@
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="501dp"
+        android:layout_height="316dp"
         android:layout_marginBottom="20dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent">

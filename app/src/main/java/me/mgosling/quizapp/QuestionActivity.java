@@ -12,7 +12,7 @@ public class QuestionActivity extends AppCompatActivity {
 
     private Quiz quiz;
     private Button answerAbtn, answerBbtn, answerCbtn, answerDbtn;
-    private TextView scoreTextView, termTextView;
+    private TextView scoreTextView, defTextView;
 
     public static final String USER_NAME = "me.mgosling.quizapp.USERNAME";
     public static final String FINAL_SCORE = "me.mgosling.quizapp.FINALSCORE";
@@ -43,7 +43,7 @@ public class QuestionActivity extends AppCompatActivity {
         answerDbtn = findViewById(R.id.answerDbtn);
 
         scoreTextView = findViewById(R.id.scoreTextView);
-        termTextView = findViewById(R.id.termTextView);
+        defTextView = findViewById(R.id.defTextView);
 
 
         answerAbtn.setOnClickListener(answerOCL);
@@ -81,7 +81,7 @@ public class QuestionActivity extends AppCompatActivity {
 
 
     private void displayQuestion() {
-        termTextView.setText(quiz.getTerm());
+        defTextView.setText(quiz.getDefinition());
 
         answerAbtn.setText(quiz.getPossibleAnswers().get(0));
         answerBbtn.setText(quiz.getPossibleAnswers().get(1));
