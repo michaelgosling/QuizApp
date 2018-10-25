@@ -1,7 +1,5 @@
 package me.mgosling.quizapp;
 
-import android.content.Context;
-
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -18,6 +16,15 @@ class Quiz {
     private HashMap<String, String> quizMap = new HashMap<>();
     private List<String[]> quizList = new ArrayList<>();
     private List<String> possibleAnswers = new ArrayList<>();
+    private boolean quizFinished = false;
+
+    protected boolean isQuizFinished() {
+        return quizFinished;
+    }
+
+    protected int getCurrentScore() {
+        return currentScore;
+    }
 
     protected String getUserName(){
         return userName;
@@ -27,48 +34,64 @@ class Quiz {
         return term;
     }
 
-    protected String getCorrectAnswer(){
-        return correctAnswer;
-    }
-
     protected List<String> getPossibleAnswers(){
         return possibleAnswers;
     }
 
-
-    Quiz(String name, Context ctx){
-        userName = name;
-
-        readQuizData(ctx);
-        currentQuestionIndex = -1;
-        newQuestion();
+    protected int getTotalTerms() {
+        return quizList.size();
     }
 
-    private void newQuestion(){
-        possibleAnswers.clear();
-        currentQuestionIndex++;
-        term = quizList.get(currentQuestionIndex)[0];
-        correctAnswer = quizMap.get(term);
-        possibleAnswers.add(correctAnswer);
 
-        while(possibleAnswers.size() < 4){
-            String answer = quizList.get(new Random().nextInt(quizList.size()-1))[1];
-            if (!answer.equals(correctAnswer)){
-                possibleAnswers.add(answer);
-            }
+    public Quiz(String name, InputStream inputStream) {
+        userName = name;
+
+        readQuizData(inputStream);
+        currentQuestionIndex = -1;
+        nextQuestion();
+    }
+
+    protected boolean guessAnswer(String answer) {
+        if (answer.equals(correctAnswer)) {
+            currentScore++;
+            nextQuestion();
+            return true;
+        } else {
+            nextQuestion();
+            return false;
         }
+    }
 
+    // grabs next question and random answers
+    private void nextQuestion() {
+        currentQuestionIndex++;
+        if (currentQuestionIndex < quizList.size()) {
+            possibleAnswers.clear();
+
+            term = quizList.get(currentQuestionIndex)[0];
+            correctAnswer = quizMap.get(term);
+            possibleAnswers.add(correctAnswer);
+
+            while (possibleAnswers.size() < 4) {
+                String answer = quizList.get(new Random().nextInt(quizList.size() - 1))[1];
+                if (!answer.equals(correctAnswer) && !possibleAnswers.contains(answer)) {
+                    possibleAnswers.add(answer);
+                }
+            }
+            Collections.shuffle(possibleAnswers);
+        } else {
+            quizFinished = true;
+        }
     }
 
     // Reads quiz file into quizMap hashmap.
-    private void readQuizData(Context ctx){
+    private void readQuizData(InputStream is) {
         // array to read in file lines
         List<String> lines = new ArrayList<>();
 
         // read file lines in
         try {
-            InputStream inputStream = ctx.getResources().openRawResource(R.raw.quiz);
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(is));
             String line;
 
             while ((line = bufferedReader.readLine()) != null){
@@ -76,7 +99,7 @@ class Quiz {
             }
 
             bufferedReader.close();
-            inputStream.close();
+            is.close();
         } catch (Exception e){
             e.printStackTrace();
         }
@@ -84,10 +107,9 @@ class Quiz {
         // shuffle lines so terms are in different order
         Collections.shuffle(lines);
 
-
         // read terms into hashmap and ArrayList
         for (String line : lines){
-            String termAndDef[] = line.split(",");
+            String termAndDef[] = line.split(":");
             quizList.add(termAndDef);
             quizMap.put(termAndDef[0], termAndDef[1]);
         }
